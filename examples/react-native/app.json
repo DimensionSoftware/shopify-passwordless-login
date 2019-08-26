@@ -2,6 +2,7 @@
   "expo": {
     "name": "Shopify Passwordless Login",
     "slug": "shopify-passwordless-login",
+    "scheme": "passwordless-dimensionsoftware",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": [
