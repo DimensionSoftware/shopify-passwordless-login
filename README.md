@@ -9,11 +9,11 @@
 
 </center>
 
-## iOS + Android Support
+## Native iOS + Android Support
 
 [Login to Shopify, Passwordlessly][pw-link] using this example React Native codebase.  No native modules to link & [Expo friendly!][expo-link]
 
-## Quick Start Native
+## Quick Start
 
 ```
 $ git clone git@github.com:DimensionSoftware/shopify-passwordless-login.git

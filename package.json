@@ -1,0 +1,56 @@
+{
+    "name": "shopify-passwordless-login",
+    "version": "0.0.1",
+    "description": "The simplest way to add passwordless authentication to your Shopify store",
+    "source": "src/index.tsx",
+    "main": "dist/index.tsx",
+    "module": "dist/index.module.tsx",
+    "unpkg": "dist/index.umd.tsx",
+    "repository": "git@github.com:DimensionSoftware/shopify-passwordless-login.git",
+    "author": "Dimension Software <support@dimensionsoftware.com>",
+    "license": "GPL",
+    "private": false,
+    "scripts": {
+        "build": "microbundle --jsx react",
+        "dev": "microbundle watch --jsx react"
+    },
+    "files": [
+        "src",
+        "dist"
+    ],
+    "dependencies": {
+        "node-fetch": "^2.6.0"
+    },
+    "devDependencies": {
+        "@types/node-fetch": "^2.5.0",
+        "@types/query-string": "^6.3.0",
+        "eslint": "^6.2.2",
+        "eslint-config-prettier": "^6.1.0",
+        "eslint-plugin-prettier": "^3.1.0",
+        "eslint-plugin-react": "^7.14.3",
+        "microbundle": "^0.11.0",
+        "prettier": "^1.18.2",
+        "query-string": "^6.8.2",
+        "react": "^16.8.6"
+    },
+    "peerDependencies": {
+        "react": "^16.9.0"
+    },
+    "eslintConfig": {
+        "extends": [
+            "plugin:prettier/recommended",
+            "plugin:react/recommended"
+        ],
+        "env": {
+            "browser": true,
+            "es6": true
+        },
+        "globals": {
+            "Atomics": "readonly",
+            "SharedArrayBuffer": "readonly"
+        },
+        "parserOptions": {
+            "ecmaVersion": 2018
+        }
+    }
+}
