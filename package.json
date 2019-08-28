@@ -1,18 +1,20 @@
 {
     "name": "shopify-passwordless-login",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "description": "The simplest way to add passwordless authentication to your Shopify store",
-    "source": "src/index.tsx",
-    "main": "dist/index.tsx",
-    "module": "dist/index.module.tsx",
-    "unpkg": "dist/index.umd.tsx",
+    "source": "src/index.ts",
+    "main": "dist/index.ts",
+    "module": "dist/index.module.ts",
+    "unpkg": "dist/index.umd.ts",
     "repository": "git@github.com:DimensionSoftware/shopify-passwordless-login.git",
-    "author": "Dimension Software <support@dimensionsoftware.com>",
-    "license": "GPL",
+    "author": "Dimension Software <support@dimensionsoftware.com> (https://dimensionsofware.com)",
+    "homepage": "https://github.com/DimensionSoftware/shopify-passwordless-login",
+    "license": "MIT",
     "private": false,
     "scripts": {
-        "build": "microbundle --jsx react",
-        "dev": "microbundle watch --jsx react"
+      "build": "microbundle src/*",
+      "prepare": "yarn run build",
+      "dev": "microbundle watch src/*"
     },
     "files": [
         "src",
