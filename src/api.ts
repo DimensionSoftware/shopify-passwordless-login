@@ -11,18 +11,23 @@ export const login = (store: string): Login => {
     },
     // kick-off passwordless email flow
     passwordless: async (params: PasswordlessUserParams) => {
-      const res = await fetch(
-        `https://${store}.myshopify.com/apps/dimensionauth/passwordless?${queryString.stringify(
-          {
-            email: params.email,
-            native: 1,
-            code: `${pair()} &nbsp; ${pair()} &nbsp; ${Math.floor(
-              Math.random() * 10
-            )}`
-          }
+      const email = params.email,
+        code = `${pair()} &nbsp; ${pair()} &nbsp; ${Math.floor(
+          Math.random() * 10
         )}`
-      )
-      return res.json()
+      if (email && email.length > 5 && email.indexOf('@') > -1) {
+        const res = await fetch(
+          `https://${store}.myshopify.com/apps/dimensionauth/passwordless?${queryString.stringify(
+            {
+              email,
+              code,
+              native: 1
+            }
+          )}`
+        )
+        return res.json()
+      }
+      return { success: false }
     }
   }
 }
