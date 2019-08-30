@@ -1,12 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import Login from './Login'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Shopify Passwordless Login Example</Text>
+      <Login />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -14,6 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
