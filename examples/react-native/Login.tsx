@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import {
   ImageBackground,
+  TouchableOpacity,
   TextInput,
-  Button,
   StyleSheet,
   Text
 } from 'react-native'
@@ -16,7 +16,6 @@ export default function Login() {
   const [email, setEmail] = useState(''),
     doLogin = async () => {
       const r = await passwordless({ email })
-      // console.warn(r)
       alert(
         r.success
           ? 'Check your email for a login link!'
@@ -27,6 +26,7 @@ export default function Login() {
       setEmail(v)
     },
     handleRedirect = (url: string) => {
+      if (!url && !url.length) return // guard
       const { path, queryParams } = Linking.parse(url)
       alert(
         `Linked to app with path: ${path} and data: ${JSON.stringify(
@@ -35,13 +35,14 @@ export default function Login() {
       )
     }
 
-  // listen for open via custom linking scheme
+  // listen for open url via custom linking scheme
   Linking.addEventListener('url', handleRedirect)
+  Linking.getInitialURL().then((url: string) => handleRedirect(url))
 
   // render
   return (
     <ImageBackground source={require('./assets/bg.png')} style={styles.bg}>
-      <Text style={styles.h1}>Passwordless Demo</Text>
+      <Text style={styles.h1}>PASSWORDLESS LOGIN</Text>
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
@@ -53,7 +54,9 @@ export default function Login() {
         style={styles.email}
         value={email}
       />
-      <Button title="LOGIN" color="#fff" onPress={doLogin} />
+      <TouchableOpacity style={styles.button} onPress={doLogin}>
+        <Text style={styles.buttonText}>LOGIN or SIGN UP</Text>
+      </TouchableOpacity>
     </ImageBackground>
   )
 }
@@ -67,19 +70,27 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   h1: {
-    color: 'rgba(255,255,255,.75)',
-    fontSize: 18,
-    marginBottom: 25,
-    marginTop: -75
+    color: 'rgba(255,255,255,.95)',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 50,
+    marginTop: -175
+  },
+  button: {},
+  buttonText: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: '#ffc600'
   },
   email: {
-    height: 50,
+    height: 60,
     fontSize: 17,
     marginBottom: 25,
-    width: 250,
+    width: 300,
     textAlign: 'center',
-    color: '#fff',
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(100,100,100,.95)'
+    color: '#333',
+    fontWeight: '400',
+    backgroundColor: 'rgba(255,255,255,.95)',
+    borderRadius: 4
   }
 })
