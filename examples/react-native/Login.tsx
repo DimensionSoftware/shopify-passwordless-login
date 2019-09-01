@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  Image,
   Text
 } from 'react-native'
 import { login } from 'shopify-passwordless-login'
@@ -34,6 +35,11 @@ export default function Login() {
   // render
   return (
     <ImageBackground source={require('./assets/bg.png')} style={styles.bg}>
+      <Image
+        source={require('./assets/dimension_icon_square.png')}
+        resizeMode={'contain'}
+        style={styles.icon}
+      />
       <Text style={styles.h1}>PASSWORDLESS LOGIN</Text>
       <TextInput
         autoCapitalize="none"
@@ -46,7 +52,11 @@ export default function Login() {
         style={styles.email}
         value={email}
       />
-      <TouchableOpacity style={styles.button} onPress={doLogin}>
+      <TouchableOpacity
+        activeOpacity={0.85}
+        style={styles.button}
+        onPress={doLogin}
+      >
         <Text style={styles.buttonText}>LOGIN or SIGN UP</Text>
       </TouchableOpacity>
     </ImageBackground>
@@ -61,23 +71,31 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%'
   },
+  icon: { marginTop: -250, height: 50 },
   h1: {
     color: 'rgba(255,255,255,.95)',
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: 17,
     marginBottom: 50,
-    marginTop: -175
+    marginTop: 50
   },
-  button: {},
+  button: {
+    height: 60,
+    width: 300,
+    textAlign: 'center',
+    borderRadius: 2,
+    backgroundColor: '#96c'
+  },
   buttonText: {
     fontSize: 17,
-    fontWeight: '600',
-    color: '#ffc600'
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 18,
+    color: '#fff'
   },
   email: {
     height: 60,
     fontSize: 17,
-    marginBottom: 25,
+    marginBottom: 15,
     width: 300,
     textAlign: 'center',
     color: '#333',
