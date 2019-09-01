@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text
 } from 'react-native'
-import { Linking } from 'expo'
 import { login } from 'shopify-passwordless-login'
 
 const store = 'dimensionsoftware', // YOUR-STORE.myshopify.com
@@ -15,7 +14,13 @@ const store = 'dimensionsoftware', // YOUR-STORE.myshopify.com
 export default function Login() {
   const [email, setEmail] = useState(''),
     doLogin = async () => {
+      // initiate passwordless
       const r = await passwordless({ email })
+      if (r.error && r.error.indexOf('GraphQL'))
+        console.warn(
+          'Set your Customer Access Token in the Passwordless Shopify Admin -> Native Apps!'
+        )
+      // ui feedback
       alert(
         r.success
           ? 'Check your email for a login link!'
@@ -24,20 +29,7 @@ export default function Login() {
     },
     emailChanged = (v: string) => {
       setEmail(v)
-    },
-    handleRedirect = (url: string) => {
-      if (!url && !url.length) return // guard
-      const { path, queryParams } = Linking.parse(url)
-      alert(
-        `Linked to app with path: ${path} and data: ${JSON.stringify(
-          queryParams
-        )}`
-      )
     }
-
-  // listen for open url via custom linking scheme
-  Linking.addEventListener('url', handleRedirect)
-  Linking.getInitialURL().then((url: string) => handleRedirect(url))
 
   // render
   return (
