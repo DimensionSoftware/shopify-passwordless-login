@@ -7,6 +7,7 @@ import { Linking } from 'expo'
 const handleRedirect = (url: string) => {
   if (!url && !url.length) return // guard
   const { path, queryParams } = Linking.parse(url)
+  // path contains your CustomerAccessToken
   if (path.length)
     alert(
       `Linked to app with path: ${path} and data: ${JSON.stringify(
