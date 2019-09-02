@@ -13,6 +13,8 @@
 
 [Login to Shopify, Passwordlessly][pw-link] using this example React Native codebase, no native modules to link & [Expo friendly!][expo-link]
 <br />
+<br />
+
 [![Shopify Passwordless Login for React Native Apps][ss-image]][pw-link]
 
 
