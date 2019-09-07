@@ -55,7 +55,7 @@ if (r.success) {
 Native Apps must respond to a custom URI scheme containing a Shopify CustomerAccessToken which we generate from your Storefront Access Token.  [First edit your app.json](https://github.com/DimensionSoftware/shopify-passwordless-login/blob/master/examples/react-native/app.json#L5) and the rest is simple:
 
 ```
-import { Linking } from 'expo'
+import { Linking } from 'react-native'
 
 // listen for open url via custom linking scheme
 const handleRedirect = url => {
@@ -72,6 +72,28 @@ const handleRedirect = url => {
 Linking.addEventListener('url', handleRedirect)          // app running in background
 Linking.getInitialURL().then(url => handleRedirect(url)) // app launched
 
+```
+
+<br />
+
+#### Optional *Step 3* &nbsp; // &nbsp; Cart Checkout and Payment
+Customers love your fast and secure Passwordless flow, loaded their Cart up with goods and are ready to checkout!  Passing the CustomerAccessToken through as a header to the webUrl from Shopify's Storefront API allows for a smooth transition to Shopify's Payment Gateway:
+
+```
+import { WebView } from 'react-native-webview'
+
+<WebView
+  style={{ flex: 1 }}
+  source={{
+    uri: webUrl, // from Shopify's Storefront API
+    headers: {   // from handleRedirect, above
+      'X-Shopify-Customer-Access-Token': customerAccessToken
+    }
+  }}
+  javaScriptEnabled={true}
+  domStorageEnabled={true}
+  startInLoadingState={true}
+/>
 ```
 
 <br />
