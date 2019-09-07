@@ -76,8 +76,8 @@ Linking.getInitialURL().then(url => handleRedirect(url)) // app launched
 
 <br />
 
-#### Optional *Step 3* &nbsp; // &nbsp; Cart Checkout and Payment
-Customers love your fast and secure Passwordless flow, loaded their Cart up with goods and are ready to checkout!  Passing the CustomerAccessToken through as a header to the webUrl from Shopify's Storefront API allows for a smooth transition to Shopify's Payment Gateway:
+#### Optional *Step 3* &nbsp; // &nbsp; [Cart Checkout and Payment][checkout-link]
+Customers love your fast & secure Passwordless flow, loaded their cart up with goods and are ready to checkout!  Passing the CustomerAccessToken through as a header to the webUrl from Shopify's Storefront API Checkout allows for a smooth Payment Gateway transition:
 
 ```
 import { WebView } from 'react-native-webview'
@@ -85,7 +85,7 @@ import { WebView } from 'react-native-webview'
 <WebView
   style={{ flex: 1 }}
   source={{
-    uri: webUrl, // from Shopify's Storefront API
+    uri: webUrl, // from Shopify's Storefront API Checkout object
     headers: {   // from handleRedirect, above
       'X-Shopify-Customer-Access-Token': customerAccessToken
     }
@@ -105,6 +105,7 @@ import { WebView } from 'react-native-webview'
 
 </p>
 
+[checkout-link]: https://help.shopify.com/en/api/storefront-api/reference/object/checkout
 [custom-link]: https://blog.gisspan.com/2017/02/Implementing-OAuth-on-mobile-Facebook-login-as-example.html
 [sat-link]: https://help.shopify.com/en/api/storefront-api/getting-started
 [pw-link]: https://login.dimensionsoftware.com
