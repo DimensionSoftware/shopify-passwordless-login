@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import * as queryString from 'query-string'
-import { SocialParams, PasswordlessUserParams, Login } from './types'
+import { SocialParams, PasswordlessUserParams, Login } from '../index.d'
 
 export const login = (store: string): Login => {
   return {
