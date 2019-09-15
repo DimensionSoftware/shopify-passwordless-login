@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   Dimensions,
   ImageBackground,
@@ -21,6 +21,7 @@ const store = 'dimensionsoftware', // YOUR-STORE.myshopify.com
 export default function Login() {
   const [email, setEmail] = useState<string>(''),
     [socialUri, setSocialUri] = useState<string>(''),
+    webView = useRef(null),
     doLogin = async () => {
       // initiate passwordless email login
       const r = await passwordless({ email })
@@ -87,6 +88,7 @@ export default function Login() {
       </View>
       <Modal visible={!!socialUri} animationType="slide">
         <WebView
+          ref={webView}
           source={{
             uri: socialUri
           }}
@@ -95,8 +97,10 @@ export default function Login() {
               // success, so--
               setSocialUri('') // reset ui
               Linking.openURL(e.url) // send CustomerAccessToken to app
+              webView.current.stopLoading() // halt webView
+              return false
             }
-            return !!!e.url.match(/^passwordless-/)
+            return true
           }}
           javaScriptEnabled={true}
           domStorageEnabled={true}
