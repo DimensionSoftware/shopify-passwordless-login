@@ -1,5 +1,5 @@
-declare var o: (t: any) => {
+declare var e: (r: any) => {
     social: (n: any) => string;
-    passwordless: (o: any) => Promise<any>;
+    passwordless: (e: any) => Promise<any>;
 };
-export { o as login };
+export { e as login };
