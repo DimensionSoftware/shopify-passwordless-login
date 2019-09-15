@@ -1,21 +1,28 @@
 import React, { useState } from 'react'
 import {
+  Dimensions,
   ImageBackground,
   TouchableOpacity,
   TextInput,
   StyleSheet,
   Image,
-  Text
+  Text,
+  Linking,
+  View,
+  Modal
 } from 'react-native'
-import { login } from 'shopify-passwordless-login'
+import { login } from 'shopify-passwordless-login' // TODO pull types in and use
+import { WebView } from 'react-native-webview'
 
 const store = 'dimensionsoftware', // YOUR-STORE.myshopify.com
-  { passwordless } = login(store)
+  { passwordless, social } = login(store),
+  { height, width } = Dimensions.get('window')
 
 export default function Login() {
-  const [email, setEmail] = useState(''),
+  const [email, setEmail] = useState<string>(''),
+    [socialUri, setSocialUri] = useState<string>(''),
     doLogin = async () => {
-      // initiate passwordless
+      // initiate passwordless email login
       const r = await passwordless({ email })
       if (r.error && r.error.indexOf('GraphQL'))
         console.warn(
@@ -28,9 +35,22 @@ export default function Login() {
           : 'Please reenter your email address.'
       )
     },
+    doSocialLogin = async (network: string) => {
+      // initiate social login
+      setSocialUri(social(network))
+    },
     emailChanged = (v: string) => {
       setEmail(v)
-    }
+    },
+    SocialButton = ({ network }) => (
+      <TouchableOpacity
+        activeOpacity={0.85}
+        style={styles.socialButton}
+        onPress={_ => doSocialLogin(network)}
+      >
+        <Text style={styles.socialButtonText}>{capitalize(network)}</Text>
+      </TouchableOpacity>
+    )
 
   // render
   return (
@@ -59,6 +79,39 @@ export default function Login() {
       >
         <Text style={styles.buttonText}>LOGIN or SIGN UP</Text>
       </TouchableOpacity>
+      <View style={styles.row}>
+        <SocialButton network="facebook" />
+        <SocialButton network="twitter" />
+        <SocialButton network="google" />
+        <SocialButton network="linkedin" />
+      </View>
+      <Modal visible={!!socialUri} animationType="slide">
+        <WebView
+          source={{
+            uri: socialUri
+          }}
+          onShouldStartLoadWithRequest={e => {
+            if (e.url.match(/^passwordless-/)) {
+              // success, so--
+              setSocialUri('') // reset ui
+              Linking.openURL(e.url) // send CustomerAccessToken to app
+            }
+            return !!!e.url.match(/^passwordless-/)
+          }}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          startInLoadingState={true}
+          style={styles.webView}
+        />
+        <TouchableOpacity
+          style={styles.closeModal}
+          onPress={() => {
+            setSocialUri('')
+          }}
+        >
+          <Text>CLOSE</Text>
+        </TouchableOpacity>
+      </Modal>
     </ImageBackground>
   )
 }
@@ -78,12 +131,14 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     marginTop: 50
   },
+  row: { flexDirection: 'row' },
   button: {
     height: 60,
     width: 300,
     textAlign: 'center',
     borderRadius: 2,
-    backgroundColor: '#96c'
+    backgroundColor: '#96c',
+    marginBottom: 50
   },
   buttonText: {
     fontSize: 17,
@@ -92,6 +147,8 @@ const styles = StyleSheet.create({
     marginTop: 18,
     color: '#fff'
   },
+  socialButton: { marginHorizontal: 5 },
+  socialButtonText: { fontSize: 16, color: '#96c' },
   email: {
     height: 60,
     fontSize: 17,
@@ -102,5 +159,13 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     backgroundColor: 'rgba(255,255,255,.95)',
     borderRadius: 4
-  }
+  },
+  webView: { backgroundColor: '#fff', flex: 1, height, width },
+  closeModal: { position: 'absolute', top: 50, right: 30 }
 })
+
+// helper fns
+// ---------
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
