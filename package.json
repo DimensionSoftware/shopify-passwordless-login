@@ -1,6 +1,6 @@
 {
     "name": "shopify-passwordless-login",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "The simplest way to add passwordless authentication to your Shopify store",
     "source": "src/index.ts",
     "main": "dist/index.ts",
