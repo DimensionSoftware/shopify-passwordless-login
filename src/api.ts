@@ -1,16 +1,16 @@
 import fetch from 'node-fetch'
 import * as queryString from 'query-string'
-import { SocialParams, PasswordlessUserParams, Login } from '../index.d'
+import * as pwless from './index'
 
-export const login = (store: string): Login => {
+export const login = (store: string): pwless.Login => {
   return {
     // kick-off $social flow
-    social: (social: SocialParams) => {
+    social: (social: pwless.SocialParams) => {
       // TODO a real WebBrowser must make this request
       return `https://${store}.myshopify.com/apps/dimensionauth/${social}/1?native=1`
     },
     // kick-off passwordless email flow
-    passwordless: async (params: PasswordlessUserParams) => {
+    passwordless: async (params: pwless.UserParams) => {
       const email = params.email,
         code = `${pair()} &nbsp; ${pair()} &nbsp; ${Math.floor(
           Math.random() * 10
