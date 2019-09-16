@@ -4623,10 +4623,10 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
-shopify-passwordless-login@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/shopify-passwordless-login/-/shopify-passwordless-login-0.0.7.tgz#cb89e45c5670654d67c12398375b8c519f68b8ce"
-  integrity sha512-x2NbzpLyhLMxwb5ZEdJ8ZpGXFjIkxzASWfXmuaXdH3yJcEU2+E8ZlsOP1IE9VC3DMmdj3Yz/rmGnjC8VGmrVmQ==
+shopify-passwordless-login@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/shopify-passwordless-login/-/shopify-passwordless-login-1.0.0.tgz#436f6f5887392e0dba455bfb03c7496f4a01eb69"
+  integrity sha512-hkSHAldKbdXYKNc0CeQO5RZQipO0TOa6IYNVTYm5ETV0lTqB99BOfheCXIU0NZtFJPI2K9BKyNWwE+cC09tBQQ==
   dependencies:
     node-fetch "^2.6.0"
 

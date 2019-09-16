@@ -12,7 +12,7 @@ import {
   View,
   Modal
 } from 'react-native'
-import { login } from 'shopify-passwordless-login' // TODO pull types in and use
+import { login, SocialParams } from 'shopify-passwordless-login'
 import { WebView } from 'react-native-webview'
 
 const store = 'dimensionsoftware', // YOUR-STORE.myshopify.com
@@ -37,8 +37,10 @@ export default function Login() {
           : 'Please reenter your email address.'
       )
     },
-    doSocialLogin = async (network: string) => {
-      // initiate social login
+    doSocialLogin = async (network: SocialParams) => {
+      // initiate social login using a WebView
+      // - XXX this no-longer works with google
+      // - instead use OAuth, eg. https://docs.expo.io/versions/latest/sdk/app-auth/
       setSocialUri(social(network))
     },
     emailChanged = (v: string) => {
