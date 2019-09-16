@@ -1,6 +1,6 @@
 {
     "name": "shopify-passwordless-login",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "The simplest way to add passwordless authentication to your Shopify store",
     "source": "src/index.ts",
     "main": "dist/index.ts",
@@ -13,9 +13,9 @@
     "license": "MIT",
     "private": false,
     "scripts": {
-      "build": "microbundle src/*",
-      "prepare": "yarn run build",
-      "dev": "microbundle watch src/*"
+        "build": "microbundle src/*",
+        "prepare": "yarn run build",
+        "dev": "microbundle watch src/*"
     },
     "files": [
         "src",
