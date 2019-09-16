@@ -4,6 +4,7 @@
     "description": "The simplest way to add passwordless authentication to your Shopify store",
     "source": "src/index.ts",
     "main": "dist/index.ts",
+    "types": "dist/index.d.ts",
     "module": "dist/index.module.ts",
     "unpkg": "dist/index.umd.ts",
     "repository": "git@github.com:DimensionSoftware/shopify-passwordless-login.git",
