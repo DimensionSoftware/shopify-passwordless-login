@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   socialButton: { marginHorizontal: 5 },
-  socialButtonText: { fontSize: 16, color: '#96c' },
+  socialButtonText: { fontSize: 17, color: '#96c' },
   email: {
     height: 60,
     fontSize: 17,
