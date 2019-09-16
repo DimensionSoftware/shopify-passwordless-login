@@ -29,24 +29,31 @@ $ yarn add shopify-passwordless-login
 #### *Step 1* &nbsp; // &nbsp; [Create a Storefront Access Token][sat-link]
 Navigate to Passwordless Social Login in your Shopify Apps settings and scroll to Optional Install Instructions -> Native Apps.   Paste the created token into this setting, allowing us to generate a CustomerAccessToken for Step 2.
 
-Mailing a secure login link is simple:
+Mailing a [secure login link](https://github.com/DimensionSoftware/shopify-passwordless-login/blob/master/examples/react-native/Login.tsx#L26-L39) or [logging in socially](https://github.com/DimensionSoftware/shopify-passwordless-login/blob/master/examples/react-native/Login.tsx#L92-L111) is simple:
 
 ```
 import { login } from 'shopify-passwordless-login'
 
 const
-  store            = 'dimensionsoftware', // YOUR-STORE.myshopify.com
-  email            = 'test@email.com',    // magic link destnation
-  { passwordless } = login(store)
+  store                    = 'dimensionsoftware', // YOUR-STORE.myshopify.com
+  email                    = 'test@email.com',    // magic link destnation
+  { passwordless, social } = login(store)
 
-// initiate passwordless
+// initiate passwordless email
 const r = await passwordless({ email })
 if (r.success) {
-  // magic link successfully mailed
+  // login link successfully mailed
 } else {
   // error
   console.warn(r.error)
 }
+
+// or, initiate passwordless social
+// SocialParams is one of:  'facebook', 'linkedin', 'twitter', 'google'
+const uri = social('facebook')
+// uri can then be used as:
+//   - the source for a <WebView />
+//   - or, to kick-off OAuth, eg. with Google
 ```
 
 <br />
