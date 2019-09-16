@@ -8,6 +8,6 @@ export interface LoginResponse {
 }
 export interface Login {
     social: (socialParams: SocialParams) => string;
-    passwordless: (userParams: UserParams) => Promise<void>;
+    passwordless: (userParams: UserParams) => Promise<LoginResponse>;
 }
 export { login } from './api';
