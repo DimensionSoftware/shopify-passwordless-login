@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import {
   Dimensions,
   ImageBackground,
+  StatusBar,
   TouchableOpacity,
   TextInput,
   StyleSheet,
@@ -56,6 +57,7 @@ export default function Login() {
   // render
   return (
     <ImageBackground source={require('./assets/bg.png')} style={styles.bg}>
+      <StatusBar hidden />
       <Image
         source={require('./assets/dimension_icon_square.png')}
         resizeMode={'contain'}
