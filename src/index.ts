@@ -6,6 +6,7 @@ export interface UserParams {
 export interface LoginResponse {
   readonly success: boolean
   readonly error?: string
+  code?: string
 }
 export interface Login {
   social: (socialParams: SocialParams) => string

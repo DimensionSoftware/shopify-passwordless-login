@@ -22,10 +22,11 @@ export const login = (store: string): pwless.Login => {
               email,
               code,
               native: 1
-            }
-          )}`
-        )
-        return res.json()
+            })}`
+          ),
+          json = await res.json()
+        json.code = code // for ui reference
+        return json
       }
       return { success: false }
     }

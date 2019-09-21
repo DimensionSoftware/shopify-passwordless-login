@@ -43,6 +43,7 @@ const
 const r = await passwordless({ email })
 if (r.success) {
   // login link successfully mailed
+  alert(`Please check ${email} for a Login Link and Security Code matching ${r.code}`)
 } else {
   // error
   console.warn(r.error)
