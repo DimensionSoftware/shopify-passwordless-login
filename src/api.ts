@@ -6,8 +6,10 @@ export const login = (store: string): pwless.Login => {
   return {
     // kick-off $social flow
     social: (social: pwless.SocialParams) => {
-      // TODO a real WebBrowser must make this request
-      return `https://${store}.myshopify.com/apps/dimensionauth/${social}/1?native=1`
+      // a real WebBrowser must make this request so redirects happen
+      return `https://${shopifyDomainFrom(
+        store
+      )}/apps/dimensionauth/${social}/1?native=1`
     },
     // kick-off passwordless email flow
     passwordless: async (params: pwless.UserParams) => {
@@ -17,8 +19,9 @@ export const login = (store: string): pwless.Login => {
         )}`
       if (email && email.length > 5 && email.indexOf('@') > -1) {
         const res = await fetch(
-          `https://${store}.myshopify.com/apps/dimensionauth/passwordless?${queryString.stringify(
-            {
+            `https://${shopifyDomainFrom(
+              store
+            )}/apps/dimensionauth/passwordless?${queryString.stringify({
               email,
               code,
               native: 1
@@ -35,6 +38,14 @@ export const login = (store: string): pwless.Login => {
 
 // helper fns
 // --------
+function shopifyDomainFrom(domain: string) {
+  if (domain.indexOf('myshopify.com') >= 0) {
+    return domain
+  } else {
+    return domain.indexOf('.') === -1 ? `${domain}.myshopify.com` : domain // should be a shopify stores' full domain
+  }
+}
+
 function pair(): string {
   const vowels = ['a', 'e', 'i', 'o', 'u'],
     consonants = [
