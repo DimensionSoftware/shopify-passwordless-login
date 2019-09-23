@@ -14,9 +14,7 @@ export const login = (store: string): pwless.Login => {
     // kick-off passwordless email flow
     passwordless: async (params: pwless.UserParams) => {
       const email = params.email,
-        code = `${pair()} &nbsp; ${pair()} &nbsp; ${Math.floor(
-          Math.random() * 10
-        )}`
+        code = `${pair()} ${pair()} ${Math.floor(Math.random() * 10)}`
       if (email && email.length > 5 && email.indexOf('@') > -1) {
         const res = await fetch(
             `https://${shopifyDomainFrom(
@@ -28,7 +26,6 @@ export const login = (store: string): pwless.Login => {
             })}`
           ),
           json = await res.json()
-        json.code = code // for ui reference
         return json
       }
       return { success: false }
