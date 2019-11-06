@@ -2,6 +2,8 @@
 export type SocialParams = 'google' | 'facebook' | 'twitter' | 'linkedin'
 export interface UserParams {
   email: string
+  lng?: number
+  lat?: number
 }
 export interface LoginResponse {
   readonly success: boolean

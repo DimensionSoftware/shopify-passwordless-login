@@ -14,7 +14,10 @@ export const login = (store: string): pwless.Login => {
     // kick-off passwordless email flow
     passwordless: async (params: pwless.UserParams) => {
       const email = params.email,
-        code = `${pair()} ${pair()} ${Math.floor(Math.random() * 10)}`
+        code = `${pair()} ${pair()} ${Math.floor(Math.random() * 10)}`,
+        lng = params.lng,
+        lat = params.lat,
+        geo = lng && lat ? { lng, lat } : {}
       if (email && email.length > 5 && email.indexOf('@') > -1) {
         const res = await fetch(
             `https://${shopifyDomainFrom(
@@ -22,6 +25,7 @@ export const login = (store: string): pwless.Login => {
             )}/apps/dimensionauth/passwordless?${queryString.stringify({
               email,
               code,
+              ...geo,
               native: 1
             })}`
           ),
